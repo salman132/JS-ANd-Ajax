@@ -1,0 +1,11 @@
+<p>AJAX Asynchronous JavaScript and XML<br>&lt;div id="output1"&gt;People List<br>    &lt;br&gt;<br>&lt;/div&gt;<br>&lt;div id="output2"&gt;&lt;/div&gt;</p>
+
+<p>&lt;script&gt;<br>    var output1 = document.getElementById('output1');<br>    var output2 = document.getElementById('output2');</p>
+
+<p>    var hr = new XMLHttpRequest();<br>    var url = "https://api.myjson.com/bins/1lzpg";</p>
+
+<p>    hr.onreadystatechange = function () {<br>        if(this.status == 404){<br>            console.log('not found');<br>        }else{<br>        if(this.readyState == 1){<br>            console.log('setup');<br>       }<br>               if(this.readyState == 2){<br>            console.log('sent');<br>       } <br>                   if(this.readyState == 3){<br>            console.log('processed');<br>       }     <br>        if (this.readyState == 4 &amp;&amp; this.status == 200) {<br>            var myObj = JSON.parse(hr.responseText);<br>            console.log(myObj);<br>            output1.innerHTML = myObj.people[1].firstName;<br>        }}<br>    }</p>
+
+<p>    <br>    hr.open("GET", url, true);<br>  <br>    hr.send();</p>
+
+<p>    console.log(hr);<br>&lt;/script&gt;</p>

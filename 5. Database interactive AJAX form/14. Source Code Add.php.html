@@ -1,0 +1,11 @@
+<p>&lt;?php <br>$arr = [];<br>$arr['first'] = $_POST['fname'];<br>$arr['last'] = $_POST['lname'];<br>$arr['age'] = $_POST['age'];</p>
+
+<p>$con=new mysqli("localhost","root","","ajaxtest");<br>$sql = "INSERT INTO `names` (`first`, `last`, `age`) VALUES ('".$arr['first']."', '".$arr['last'] ."', '".$arr['age']."' );";</p>
+
+<p>if($con-&gt;ping()){<br>     $arr['connected']  = true ;<br>}else{<br>        $arr['connected']  = false; <br>}</p>
+
+<p>if ($con-&gt;query($sql) === TRUE) {<br>    $arr['xstatus']  = "Created" ;<br>    $arr['id']  = $con-&gt;insert_id;<br>}else{<br>    $arr['xstatus']  = "Error" ;<br>    $arr['message']  = $con-&gt;error;<br>}</p>
+
+<p>echo json_encode($arr);</p>
+
+<p>?&gt;</p>

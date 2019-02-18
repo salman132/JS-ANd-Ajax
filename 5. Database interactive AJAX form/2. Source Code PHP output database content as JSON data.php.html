@@ -1,0 +1,1 @@
+<p>&lt;?php <br>$arr = array();<br>$con=new mysqli("localhost","root","","ajaxtest");<br>$sql = "SELECT * FROM names";<br>if($result = $con-&gt;query($sql) ){<br>    while($row = $result-&gt;fetch_assoc()){<br>        $arr[] = $row;<br>    }<br>    echo json_encode($arr);<br> }<br>?&gt;</p>

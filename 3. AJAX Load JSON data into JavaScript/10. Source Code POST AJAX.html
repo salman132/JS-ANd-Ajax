@@ -1,0 +1,9 @@
+<p><strong>index.html</strong></p><p>&lt;form name="TestForm" action="test.php" method="post"&gt;<br>    First :<br>    &lt;input type="text" name="fname" id="fname" value="mike" /&gt;<br>    &lt;br&gt; Last :<br>    &lt;input type="text" name="lname" id="lname" value="smith" /&gt;<br>    &lt;br&gt; Age : :<br>    &lt;input type="number" name="age" id="age" value="50" /&gt;<br>    &lt;br&gt;<br>    &lt;input type="button" value="SEND via AJAX" onclick="postData()"&gt;<br>    &lt;input type="submit"&gt;<br>&lt;/form&gt;</p>
+
+<p>&lt;div id="output1"&gt;&lt;/div&gt;</p>
+
+<p>&lt;script&gt;<br>    var output1 = document.getElementById('output1');</p>
+
+<p>    function postData() {<br>        var firstName = document.getElementById('fname').value;<br>        var lastName = document.getElementById('lname').value;<br>        var age = document.getElementById('age').value;<br>        var vars = "fname=" + firstName + "&amp;lname=" + lastName + "&amp;age=" + age;<br>        console.log(vars);<br>        var hr = new XMLHttpRequest();<br>        var url = "test.php";<br>        <br>          hr.onreadystatechange = function () {<br>            if (this.readyState == 4 &amp;&amp; this.status == 200) {<br>                //var myObj = JSON.parse();<br>                console.log(hr.responseText);<br>            }<br>        }<br>        hr.open("POST", url, true);<br>        hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");<br>    <br>        hr.send(vars);<br>    }<br>&lt;/script&gt;</p><p><br></p><p><strong>test.php</strong></p><p>&lt;?php <br>$info=$_POST['fname'];</p>
+
+<p>echo 'FirstName = '.$info;<br>?&gt;</p>

@@ -1,0 +1,15 @@
+<p><strong>index.html</strong></p><p>&lt;form name="TestForm" action="test.php" id="TestForm"&gt;<br>    First :<br>    &lt;input type="text" name="fname" id="fname" value="mike" /&gt;<br>    &lt;br&gt; Last :<br>    &lt;input type="text" name="lname" id="lname" value="smith" /&gt;<br>    &lt;br&gt; Age : :<br>    &lt;input type="number" name="age" id="age" value="50" /&gt;<br>    &lt;br&gt;<br>    &lt;input type="submit"&gt;<br>&lt;/form&gt;</p>
+
+<p>&lt;div id="output1"&gt;&lt;/div&gt;<br>&lt;div id="status"&gt;Status&lt;/div&gt;<br>&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"&gt;&lt;/script&gt;<br>&lt;script&gt;<br>    $(document).ready(function () {</p>
+
+<p>            $('#TestForm').submit(function (e) {<br>                e.preventDefault();<br>                $('#status').html("processing ... ");<br>                var url = "test.php";<br>                var vars = {<br>                    fname: $('#fname').val(),<br>                    lname: $('#lname').val(),<br>                    age: $('#age').val()<br>                }<br>                $.post(url, vars, function (data, status, xhr) {<br>                    console.log(data);<br>                    console.log(status);<br>                    console.log(xhr);<br>                    console.log(JSON.parse(data));<br>                    var json = JSON.parse(data);<br>                     $('#status').html("status ");<br>                    $('#output1').html('Created ' + json.first + ' ('+json.id+')');<br>                })<br>            })<br>        })<br>     <br>&lt;/script&gt;</p><p><strong>test.php</strong></p><p>&lt;?php <br>$arr = [];<br>$arr['first'] = $_POST['fname'];<br>$arr['last'] = $_POST['lname'];<br>$arr['age'] = $_POST['age'];</p>
+
+<p>$con=new mysqli("localhost","root","","ajaxtest");<br>$sql = "INSERT INTO `names` (`first`, `last`, `age`) VALUES ('".$arr['first']."', '".$arr['last'] ."', '".$arr['age']."' );";</p>
+
+<p>if($con-&gt;ping()){<br>     $arr['connected']  = true ;<br>}else{<br>        $arr['connected']  = false; <br>}</p>
+
+<p>if ($con-&gt;query($sql) === TRUE) {<br>    $arr['xstatus']  = "Created" ;<br>    $arr['id']  = $con-&gt;insert_id;<br>}else{<br>    $arr['xstatus']  = "Error" ;<br>    $arr['message']  = $con-&gt;error;<br>}</p>
+
+<p>echo json_encode($arr);</p>
+
+<p>?&gt;</p>

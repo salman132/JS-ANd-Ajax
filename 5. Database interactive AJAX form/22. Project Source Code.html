@@ -1,0 +1,25 @@
+<p>&lt;!DOCTYPE html&gt;<br>&lt;html&gt;</p>
+
+<p>&lt;head&gt;<br>    &lt;meta charset="utf-8"&gt;<br>    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;<br>    &lt;title&gt;Database AJAX Project&lt;/title&gt;<br>    &lt;style&gt;<br>        .highlight {<br>            background-color: yellow !important;<br>        }<br>        <br>        .remo {<br>            padding: 10px;<br>            margin: 5px 0;<br>            background-color: aliceblue;<br>        }<br>        <br>        span {<br>            padding: 5px;<br>            border: 1px solid #eee;<br>        }<br>        <br>        .remo span:first-child {<br>            background-color: coral;<br>            margin-left: 15px;<br>        }<br>        <br>        .remo span:last-child {<br>            margin-left: 5px;<br>            background-color: red;<br>        }<br>        <br>        input[type="text"] {<br>            width: 7em;<br>        }<br>        <br>        input[type="number"] {<br>            width: 3em;<br>        }<br>        <br>        label {<br>            font-size: 0.8em;<br>            color: darkgray;<br>        }<br>        .btn{<br>             padding: 5px;<br>            border: 1px solid #eee;<br>            background-color: aquamarine;<br>            <br>        }<br>        .addUser{<br>            padding:10px;<br>            margin:10px;<br>            background-color:black;<br>        }<br>    &lt;/style&gt;<br>&lt;/head&gt;</p>
+
+<p>&lt;body&gt;</p>
+
+<p>    &lt;div id="output"&gt;&lt;/div&gt;<br>    &lt;div class="addUser"&gt;<br>    &lt;form name="TestForm" action="test.php" id="TestForm"&gt;<br>        &lt;label for="fname"&gt;First&lt;/label&gt;<br>        &lt;input type="text" name="fname" id="fname" value="mike" /&gt;<br>        &lt;label for="lname"&gt;Last&lt;/label&gt;<br>        &lt;input type="text" name="lname" id="lname" value="smith" /&gt;<br>        &lt;label for="age"&gt;Age&lt;/label&gt;<br>        &lt;input type="number" name="age" id="age" value="50" /&gt;</p>
+
+<p>        &lt;input type="submit" class="btn"&gt;<br>    &lt;/form&gt;<br>&lt;/div&gt;</p>
+
+
+
+<p>    &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"&gt;&lt;/script&gt;<br>    &lt;script&gt;<br>        $(document).ready(function () {<br>            myOutput();<br>            $('#output').on('click', '.remo span', function () {<br>                var uid = $(this).parent().attr('data-value');<br>                if ($(this).text() == "Delete") {<br>                    var vars = {<br>                        uid: uid<br>                    };<br>                    $.post('delete.php', vars, function (data) {<br>                        myOutput();<br>                    })<br>                } else {<br>                    var c = ($(this).parent().hasClass("highlight") ? 1 : 0);<br>                    c ^= 1;<br>                    var vars = {<br>                        uid: uid,<br>                        c: c<br>                    };<br>                    $.post('update.php', vars, function (data) {<br>                        myOutput();<br>                    })<br>                }<br>            })</p>
+
+<p>            $('#TestForm').submit(function (e) {<br>                e.preventDefault();<br>                $.ajax({<br>                    url: "add.php",<br>                    data: $(this).serialize(),<br>                    type: "POST",<br>                    dataType: "json",<br>                    success: function (data) {<br>                        myOutput();<br>                    }<br>                })</p>
+
+<p>            })</p>
+
+
+
+
+
+<p>            function myOutput() {<br>                $.getJSON('data.php', function (data) {<br>                    $('#output').html('&lt;h1&gt;People List&lt;/h1&gt;');<br>                    $.each(data, function (i, item) {<br>                        var deClass = ' ';<br>                        if (item.checked == 1) {<br>                            deClass = ' highlight ';<br>                        }<br>                        $('#output').append('&lt;div class="remo ' + deClass + '" data-value="' + item.id + '" &gt;' + data[i].first + ' ' + data[i].last + '(' + data[i].age + ')&lt;span&gt;Check&lt;/span&gt;&lt;span&gt;Delete&lt;/span&gt; &lt;/div&gt;');<br>                    })<br>                })<br>            }<br>        })<br>    &lt;/script&gt;<br>&lt;/body&gt;</p>
+
+<p>&lt;/html&gt;</p>

@@ -1,0 +1,21 @@
+<p><strong>Add.php</strong></p><p>&lt;?php <br>$arr = [];<br>$arr['first'] = $_POST['fname'];<br>$arr['last'] = $_POST['lname'];<br>$arr['age'] = $_POST['age'];</p>
+
+<p>$con=new mysqli("localhost","root","","ajaxtest");<br>$sql = "INSERT INTO `names` (`first`, `last`, `age`) VALUES ('".$arr['first']."', '".$arr['last'] ."', '".$arr['age']."' );";</p>
+
+<p>if($con-&gt;ping()){<br>     $arr['connected']  = true ;<br>}else{<br>        $arr['connected']  = false; <br>}</p>
+
+<p>if ($con-&gt;query($sql) === TRUE) {<br>    $arr['xstatus']  = "Created" ;<br>    $arr['id']  = $con-&gt;insert_id;<br>}else{<br>    $arr['xstatus']  = "Error" ;<br>    $arr['message']  = $con-&gt;error;<br><br>}</p>
+
+<p>echo json_encode($arr);</p>
+
+<p>?&gt;</p><p><strong>data.php</strong></p><p><strong></strong>&lt;?php </p><p>$arr = array();<br>$con=new mysqli("localhost","root","","ajaxtest");<br>$sql = "SELECT * FROM names";<br>if($result = $con-&gt;query($sql) ){<br>    while($row = $result-&gt;fetch_assoc()){<br>        $arr[] = $row;<br>    }<br>    echo json_encode($arr);<br> }<br>?&gt;</p><p><strong>delete.php</strong><br></p><p>&lt;?php </p><p>$uid = $_POST['uid'];</p>
+
+<p>$con=new mysqli("localhost","root","","ajaxtest");</p>
+
+<p>$sql = "DELETE FROM names WHERE id = '".$uid ."'";</p>
+
+<p>if($con-&gt;query($sql)===TRUE){<br>    echo 'DELETED';<br>}else{<br>    echo "FAILED";<br>}<br>?&gt;</p><p><strong>update.php</strong></p><p>&lt;?php </p><p>$uid = $_POST['uid'];<br>$c = $_POST['c'];<br>$con=new mysqli("localhost","root","","ajaxtest");<br>$sql = "UPDATE names SET checked = '".$c."' WHERE id = '".$uid ."'";</p>
+
+<p>if($con-&gt;query($sql)===TRUE){<br>    echo 'UPDATED';<br>}else{<br>    echo "FAILED";<br>}</p>
+
+<p>?&gt;</p>

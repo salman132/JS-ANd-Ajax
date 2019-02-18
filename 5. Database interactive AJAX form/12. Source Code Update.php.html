@@ -1,0 +1,1 @@
+<p>&lt;?php <br>$uid = $_POST['uid'];<br>$c = $_POST['c'];<br>$con=new mysqli("localhost","root","","ajaxtest");<br>$sql = "UPDATE names SET checked = '".$c."' WHERE id = '".$uid ."'";<br>if($con-&gt;query($sql)===TRUE){<br>    echo 'UPDATED';<br>}else{<br>    echo "FAILED";<br>}<br>?&gt;</p>

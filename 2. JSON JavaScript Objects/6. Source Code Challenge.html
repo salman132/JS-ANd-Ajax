@@ -1,0 +1,9 @@
+<p>http://codepen.io/discoveryvip/pen/kkVNyr?editors=1010</p><p>&lt;div id="output1"&gt;People List&lt;br&gt;&lt;/div&gt;<br>&lt;div id="output2"&gt;&lt;/div&gt;</p>
+
+<p>&lt;script&gt;<br>    var output1 = document.getElementById('output1');<br>    var output2 = document.getElementById('output2');</p>
+
+<p>    var myObj = {<br>        "people": [<br>            {<br>                "firstName": "Mike",<br>                "lastName": "Smith",<br>                "age": 30<br>            },<br>            {<br>                "firstName": "John",<br>                "lastName": "Jones",<br>                "age": 40<br>            }],<br>        "places":[<br>            {<br>                "location":"Toronto",<br>                "lat":87,<br>                "long":140<br>            },<br>            {<br>                "location":"New York",<br>                "lat":67,<br>                "long":110<br>            }]<br>    };</p>
+
+<p>    console.log(myObj);<br>    <br>    for(var i=0;i&lt;myObj.people.length;i++){<br>        output1.innerHTML += "&lt;br&gt;"+myObj.people[i].firstName + " " + myObj.people[i].lastName ;<br>     }<br>    </p>
+
+<p>&lt;/script&gt;</p><p><br></p>

@@ -1,0 +1,11 @@
+<p>&lt;div id="output1"&gt;&lt;/div&gt;<br>&lt;div id="output2"&gt;&lt;/div&gt;</p>
+
+<p>&lt;script&gt;<br>    var output1 = document.getElementById('output1');<br>    var output2 = document.getElementById('output2');</p>
+
+<p>    var myObj = {<br>        "people": [<br>            {<br>                "firstName": "Mike",<br>                "lastName": "Smith",<br>                "age": 30<br>            },<br>            {<br>                "firstName": "John",<br>                "lastName": "Jones",<br>                "age": 40<br>            }]<br>    };</p>
+
+<p>    console.log(myObj);</p>
+
+<p>    var name = 'Name';<br>    var i = 0;<br>    output1.innerHTML = myObj.people[i].firstName;<br>    output2.innerHTML = myObj.people[i]['last' + name];</p>
+
+<p>    var i = 1;<br>    output1.innerHTML += myObj.people[i].firstName;<br>    output2.innerHTML += myObj.people[i]['last' + name];<br>&lt;/script&gt;</p>

@@ -1,0 +1,9 @@
+<p>&lt;div id="output1"&gt;People List&lt;br&gt;&lt;/div&gt;<br><br>&lt;div id="output2"&gt;&lt;/div&gt;</p><p><br></p><p>&lt;script&gt;</p><p>   var output1 = document.getElementById('output1');<br>   var output2 = document.getElementById('output2');</p>
+
+<p>   var myObj = {<br>     "people": [{<br>       "firstName": "Mike",<br>       "lastName": "Smith",<br>       "age": 30<br>     }, {<br>       "firstName": "John",<br>       "lastName": "Jones",<br>       "age": 40<br>     }],<br>     "places": [{<br>       "location": "Toronto",<br>       "lat": 87,<br>       "long": 140<br>     }, {<br>       "location": "New York",<br>       "lat": 67,<br>       "long": 110<br>     },<br>     {<br>       "location": "NewTown",<br>       "lat": 99,<br>       "long": 444<br>     }]<br>   };</p>
+
+<p>   console.log(myObj);</p>
+
+<p>   for (var i = 0; i &lt; myObj.people.length; i++) {<br>     output1.innerHTML += "&lt;br&gt;" + myObj.people[i].firstName + " " + myObj.people[i].lastName;<br>   }</p>
+
+<p>   for (var i = 0; i &lt; myObj.places.length; i++) {<br>     output2.innerHTML += "&lt;br&gt;" + myObj.places[i].location + " (" + myObj.places[i].lat + "," + myObj.places[i].long + ")";<br>   }</p><p><br></p><p>&lt;/script&gt;</p>

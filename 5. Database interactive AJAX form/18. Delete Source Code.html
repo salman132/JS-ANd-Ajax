@@ -1,0 +1,7 @@
+<p>&lt;?php <br>$uid = $_POST['uid'];</p>
+
+<p>$con=new mysqli("localhost","root","","ajaxtest");</p>
+
+<p>$sql = "DELETE FROM names WHERE id = '".$uid ."'";</p>
+
+<p>if($con-&gt;query($sql)===TRUE){<br>    echo 'DELETED';<br>}else{<br>    echo "FAILED";<br>}<br>?&gt;</p>
